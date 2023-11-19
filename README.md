@@ -40,7 +40,7 @@ La aplicación de seguimiento de precios de libros es una herramienta diseñada 
    ```bash
    pnpm install
    ```
-2. **Instalación de Dependencias:**
+2. **Ejecutar el programa:**
    ```bash
    node .
    ```
