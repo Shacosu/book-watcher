@@ -39,11 +39,11 @@ La aplicación de seguimiento de precios de libros es una herramienta diseñada 
 1. **Instalación de Dependencias:**
    ```bash
    pnpm install
-```
-2. **Instalación de Dependencias:**
+   ```
+2. **Ejecutar el programa:**
    ```bash
    node .
-```
+   ```
 ## Authors
 
 - [@octokatherine](https://www.github.com/octokatherine)
