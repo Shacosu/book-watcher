@@ -42,7 +42,6 @@ export default async function getBooks() {
 	}
 
 	if (booksToDelete.length > 0) {
-		console.log(booksToDelete)
 		for (let book of booksToDelete) {
 			console.log(`Se ha eliminado el libro ${book.sku}`);
 			await prisma.bookDetail.delete({ where: { bookId: book.id } });
@@ -51,5 +50,5 @@ export default async function getBooks() {
 	}
 
 
-	console.log(`Se han añadido ${booksToCreate.length} libros nuevos ${new Date().toLocaleString("es-CL", { timeZone: "America/Santiago"})}`);
+	return booksToCreate.length;
 }
