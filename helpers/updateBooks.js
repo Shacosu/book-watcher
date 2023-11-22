@@ -98,7 +98,7 @@ export default async function updateBooks() {
               from: 'Book Watcher <onboarding@resend.dev>',
               // to: ['sh4c0p@gmail.com', 'ghislaine.2305@gmail.com'],
               to: ['sh4c0p@gmail.com'],
-              subject: lastBook.stock === 1 ? `¡Alerta! Descuento del ${discountPercentage.toFixed(0)}% en el libro ${bookDetail.title}` : `¡Alerta! El libro ${bookDetail.title} esta ahora agotado! ❌`,
+              subject: lastBook.stock === 1 ? `🔔¡Alerta! Descuento del ${discountPercentage.toFixed(0)}% en el libro ${bookDetail.title}` : `🔔¡Alerta! El libro ${bookDetail.title} esta ahora agotado! ❌`,
               html: `
               <div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
               <img src="${bookDetail.image}" alt="${bookDetail.title}" style="width: 100%; max-width: 230px; height: auto; margin: 0 auto 15px; display: block; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" />
