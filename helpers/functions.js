@@ -14,8 +14,7 @@ ig.state.generateDevice('descuentolibros');
 const sendMail = async (bookDetail, lastBook, discountPercentage, lastPrice, newBook) => {
 	await resend.emails.send({
 		from: 'Book Watcher <onboarding@resend.dev>',
-		// to: ['sh4c0p@gmail.com', 'ghislaine.2305@gmail.com'],
-		to: ['pespinozahernandez22@gmail.com'],
+		to: ['sh4c0p@gmail.com', 'ghislaine.2305@gmail.com'],
 		subject: lastBook.stock === 1 ? `🔔¡Alerta! Descuento del ${discountPercentage}% en el libro ${bookDetail.title}` : `🔔¡Alerta! El libro ${bookDetail.title} esta ahora agotado! ❌`,
 		html: `
 		<div 

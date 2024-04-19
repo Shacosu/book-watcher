@@ -89,7 +89,7 @@ export default async function updateBooks() {
             const lastPrice = bookDetail.priceHistory[0].price;
             // Calcular el porcentaje de descuento
             const discountPercentage = ((lastPrice - lastBook.priceHistory[0].price) / lastPrice) * 100;
-            if (discountPercentage >= 15) {
+            if (discountPercentage >= 15 && lastBook.stock === 1) {
               console.log(`¡Alerta! Descuento del ${discountPercentage.toFixed(0)}% en el libro ${bookDetail.title}`);
               await sendMail(bookDetail, lastBook, discountPercentage, lastPrice, newBook)
           }
