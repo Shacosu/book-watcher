@@ -43,8 +43,9 @@ const sendMail = async (bookDetail, lastBook, discountPercentage, lastPrice, new
 }
 
 const imageToBuffer = async (url) => {
+	const newURL = url.replace("150x230", "1080x1080") || url;
 	const options = {
-		url,
+		url: newURL,
 		encoding: null
 	};
 	const image = await get(options);
