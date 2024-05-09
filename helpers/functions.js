@@ -13,18 +13,18 @@ ig.state.generateDevice('descuentolibros');
 
 const sendMail = async (bookDetail, lastBook, discountPercentage, lastPrice, newBook) => {
 	await resend.emails.send({
-		from: 'Book Watcher <onboarding@resend.dev>',
+		from: 'Book Watcher <contacto@marketfly.cl>',
 		to: ['sh4c0p@gmail.com', 'ghislaine.2305@gmail.com'],
 		subject: lastBook.stock === 1 ? `🔔¡Alerta! Descuento del ${discountPercentage}% en el libro ${bookDetail.title}` : `🔔¡Alerta! El libro ${bookDetail.title} esta ahora agotado! ❌`,
 		html: `
-		<div 
+		<div
 		style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-		<img 
-		src="${bookDetail.image}" 
-		alt="${bookDetail.title}" 
-		style="width: 100%; max-width: 230px; height: auto; margin: 0 auto 15px; display: block; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" 
+		<img
+		src="${bookDetail.image}"
+		alt="${bookDetail.title}"
+		style="width: 100%; max-width: 230px; height: auto; margin: 0 auto 15px; display: block; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
 		/>
-		${lastBook.stock === 1 ? 
+		${lastBook.stock === 1 ?
 			`<h2 style="color: #3498db; font-size: 24px; margin-bottom: 10px; font-weight: bold;">¡Alerta! Descuento del ${discountPercentage}% en el libro ${bookDetail.title}</h2>`
 			: `<h2 style="color: #3498db; font-size: 24px; margin-bottom: 10px; font-weight: bold;">¡Alerta! El libro ${bookDetail.title} esta ahora agotado! ❌</h2>`
 		}
