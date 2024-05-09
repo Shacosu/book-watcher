@@ -15,7 +15,7 @@ const sendMail = async (bookDetail, lastBook, discountPercentage, lastPrice, new
 	await resend.emails.send({
 		from: 'Book Watcher <contacto@marketfly.cl>',
 		to: ['sh4c0p@gmail.com', 'ghislaine.2305@gmail.com'],
-		subject: lastBook.stock === 1 ? `🔔¡Alerta! Descuento del ${discountPercentage}% en el libro ${bookDetail.title}` : `🔔¡Alerta! El libro ${bookDetail.title} esta ahora agotado! ❌`,
+		subject: lastBook.stock === 1 ? `🔔¡Alerta! Descuento del ${discountPercentage.toFixed(2)}% en el libro ${bookDetail.title}` : `🔔¡Alerta! El libro ${bookDetail.title} esta ahora agotado! ❌`,
 		html: `
 		<div
 		style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
