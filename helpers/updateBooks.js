@@ -66,7 +66,7 @@ export default async function updateBooks() {
       const bookDetail = booksToUpdateDetails.find((detail) => detail.bookId === book?.id);
 
       // Actualizar el precio del libro si es distinto al último registrado
-     
+
       if (bookDetail?.priceHistory[0]?.price !== newBook?.price ) {
         try {
           await prisma.bookDetail.update({
@@ -85,13 +85,15 @@ export default async function updateBooks() {
           if (bookDetail && bookDetail?.priceHistory.length > 0) {
             console.log(`Se ha actualizado el libro ${bookDetail.title}`);
             // Obtener el último precio registrado
-            const lastBook = await prisma.bookDetail.findUnique({ where: { id: bookDetail.id }, include: { priceHistory: { orderBy: { createdAt: 'desc' }, take: 1 } } });
+            const lastBook  = await prisma.bookDetail.findUnique({ where: { id: bookDetail.id }, include: { priceHistory: { orderBy: { createdAt: 'desc' } } } });
             const lastPrice = bookDetail.priceHistory[0].price;
+            const filteredPrice = lastBook.priceHistory.filter((price) => price.price !== 0);
+            const minPrice  = Math.min(...filteredPrice.map((price) => price.price));
             // Calcular el porcentaje de descuento
             const discountPercentage = ((lastPrice - lastBook.priceHistory[0].price) / lastPrice) * 100;
             if (discountPercentage >= 15 && lastBook.stock === 1) {
               console.log(`¡Alerta! Descuento del ${discountPercentage.toFixed(0)}% en el libro ${bookDetail.title}`);
-              await sendMail(bookDetail, lastBook, discountPercentage, lastPrice, newBook)
+              await sendMail(bookDetail, lastBook, discountPercentage, lastPrice, newBook, minPrice);
           }
 
           } else {
@@ -109,14 +111,14 @@ export default async function updateBooks() {
                 },
               });
             }
-    
+
           }
         } catch (error) {
           console.log(error)
         }
-    
+
       }
-     
+
     }
 
 

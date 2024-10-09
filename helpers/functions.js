@@ -11,7 +11,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const ig = new IgApiClient();
 ig.state.generateDevice('descuentolibros');
 
-const sendMail = async (bookDetail, lastBook, discountPercentage, lastPrice, newBook) => {
+const sendMail = async (bookDetail, lastBook, discountPercentage, lastPrice, newBook, minPrice) => {
 	await resend.emails.send({
 		from: 'Book Watcher <contacto@marketfly.cl>',
 		to: ['sh4c0p@gmail.com', 'ghislaine.2305@gmail.com'],
@@ -25,9 +25,10 @@ const sendMail = async (bookDetail, lastBook, discountPercentage, lastPrice, new
 		style="width: 100%; max-width: 230px; height: auto; margin: 0 auto 15px; display: block; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
 		/>
 		${lastBook.stock === 1 ?
-			`<h2 style="color: #3498db; font-size: 24px; margin-bottom: 10px; font-weight: bold;">¡Alerta! Descuento del ${discountPercentage}% en el libro ${bookDetail.title}</h2>`
+			`<h2 style="color: #3498db; font-size: 24px; margin-bottom: 10px; font-weight: bold;">¡Alerta! Descuento del ${discountPercentage.toFixed(2)}% en el libro ${bookDetail.title}</h2>`
 			: `<h2 style="color: #3498db; font-size: 24px; margin-bottom: 10px; font-weight: bold;">¡Alerta! El libro ${bookDetail.title} esta ahora agotado! ❌</h2>`
 		}
+		<p style="color: #333; font-size: 22px; margin-bottom: 10px; font-weight: bold;">Precio mínimo: ${formatNumber(minPrice)}</p>
 		<p style="color: #333; font-size: 22px; margin-bottom: 10px; font-weight: bold;">Precio anterior: ${formatNumber(lastPrice)}</p>
 		<p style="color: #333; font-size: 22px; margin-bottom: 10px; font-weight: bold;">Precio actual: ${formatNumber(newBook.price)}</p>
 		<p style="color: #333; font-size: 22px; margin-bottom: 10px; font-weight: bold;">Stock: ${lastBook.stock === 1 ? "Disponible ✅" : "No disponible 😢"}</p>
@@ -39,7 +40,7 @@ const sendMail = async (bookDetail, lastBook, discountPercentage, lastPrice, new
 	</div>
 		`,
 	});
-	await uploadPost(bookDetail, lastBook, discountPercentage, lastPrice, newBook);
+	// await uploadPost(bookDetail, lastBook, discountPercentage, lastPrice, newBook);
 }
 
 const imageToBuffer = async (url) => {
